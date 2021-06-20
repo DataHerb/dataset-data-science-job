@@ -1,0 +1,75 @@
+{
+  "profile": "tabular-data-package",
+  "resources": [
+    {
+      "path": "dataset/stackoverflow_job_listing.csv",
+      "profile": "tabular-data-resource",
+      "name": "stackoverflow_job_listing",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8",
+      "schema": {
+        "fields": [
+          {
+            "name": "link",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "category",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "title",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "published_at",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "location",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "stackoverflow_id",
+            "type": "integer",
+            "format": "default"
+          },
+          {
+            "name": "author",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "location_country",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "location_city",
+            "type": "string",
+            "format": "default"
+          },
+          {
+            "name": "updated_at",
+            "type": "string",
+            "format": "default"
+          }
+        ],
+        "missingValues": [
+          ""
+        ]
+      }
+    }
+  ]
+}
