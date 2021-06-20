@@ -1,0 +1,44 @@
+name: Download from Stackoverflow
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron:  '0 7 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout dataherb-flora
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+      - name: Get current directory and files
+        run: |
+          pwd
+          ls
+      - uses: actions/setup-python@v1
+        with:
+          python-version: '3.x'
+      - name: Install Python Requirements
+        run: |
+          pip install scripts/requirements.txt
+      - name: Download new data
+        run: |
+          python scripts/download_stackoverflow.py
+      - name: Update Data
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git status
+          git add .
+          git commit -m "Update SO DS Jobs Datasets" || echo "Nothing to update"
+          git status
+      - name: Push changes to repo
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.ACCESS_TOKEN }}
+          branch: master
