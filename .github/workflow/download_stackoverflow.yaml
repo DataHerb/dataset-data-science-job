@@ -2,10 +2,17 @@ name: Download from Stackoverflow
 
 on:
   push:
-    branches:
-      - main
+    paths:
+    - 'scripts/download_stackoverflow.py'
   schedule:
     - cron:  '0 7 * * *'
+  workflow_dispatch:
+    inputs:
+      whotriggered:
+        description: 'Manual Trigger'
+        default: 'GoGoGo'
+        required: false
+
 
 jobs:
   build:
