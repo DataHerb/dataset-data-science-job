@@ -32,7 +32,7 @@ jobs:
           python-version: '3.x'
       - name: Install Python Requirements
         run: |
-          pip install scripts/requirements.txt
+          pip install -r scripts/requirements.txt
       - name: Download new data
         run: |
           python scripts/download_stackoverflow.py
