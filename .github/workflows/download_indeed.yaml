@@ -1,0 +1,52 @@
+name: Download from Indeed DE
+
+on:
+  push:
+    paths:
+    - 'scripts/download_indeed.py'
+  schedule:
+    - cron:  '0 8/6 * * *'
+  workflow_dispatch:
+    inputs:
+      whotriggered:
+        description: 'Manual Trigger'
+        default: 'GoGoGo'
+        required: false
+
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout current repo
+        uses: actions/checkout@v2
+      - name: Get current directory and files
+        run: |
+          pwd
+          ls
+      - uses: actions/setup-python@v1
+        with:
+          python-version: '3.7' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+          architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+      - name: Install Python Requirements
+        run: |
+          python --version
+          pip install -r scripts/requirements.txt
+      - name: Download Records
+        run: |
+          python scripts/download_indeed.py
+          ls dataset
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git pull
+          git status
+          git add .
+          git commit -m "Update Data" || echo "Nothing to update"
+          git pull
+          git status
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          repository: DataHerb/dataset-data-science-job
+          branch: main
+          github_token: ${{ secrets.GITHUB_TOKEN }}
