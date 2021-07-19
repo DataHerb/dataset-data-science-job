@@ -5,7 +5,7 @@ on:
     paths:
     - 'scripts/download_indeed.py'
   schedule:
-    - cron:  '0 8/6 * * *'
+#     - cron:  '0 8/6 * * *'
   workflow_dispatch:
     inputs:
       whotriggered:
