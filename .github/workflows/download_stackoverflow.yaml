@@ -42,7 +42,7 @@ jobs:
           git status
           git add .
           git commit -m "Update Data" || echo "Nothing to update"
-          git pull --ff-only
+          # git pull --ff-only
           git status
       - name: Push changes
         uses: ad-m/github-push-action@master
